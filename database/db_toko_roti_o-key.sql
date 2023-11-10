@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Nov 2023 pada 08.32
+-- Waktu pembuatan: 10 Nov 2023 pada 13.45
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_toko_roti_o-key`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
+  `nama_admin` int(11) NOT NULL,
+  `email_admin` text NOT NULL,
+  `telpon_admin` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,8 +84,7 @@ CREATE TABLE `payment` (
   `payment_id` int(11) NOT NULL,
   `payment_date` datetime NOT NULL,
   `total` int(11) NOT NULL,
-  `payment_method` text NOT NULL,
-  `transaction_id` int(11) NOT NULL
+  `payment_method` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -102,7 +114,7 @@ CREATE TABLE `transaction` (
   `transaction_date` datetime NOT NULL,
   `notes` text NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `total_transaction` int(11) NOT NULL
+  `payment_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -124,6 +136,12 @@ CREATE TABLE `transaction_details` (
 --
 
 --
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
 -- Indeks untuk tabel `category`
 --
 ALTER TABLE `category`
@@ -139,8 +157,7 @@ ALTER TABLE `customer`
 -- Indeks untuk tabel `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `payment_transaction` (`transaction_id`);
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indeks untuk tabel `product`
@@ -154,7 +171,8 @@ ALTER TABLE `product`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`transaction_id`),
-  ADD KEY `transaction_customer` (`customer_id`);
+  ADD KEY `transaction_customer` (`customer_id`),
+  ADD KEY `transaction_payment` (`payment_id`);
 
 --
 -- Indeks untuk tabel `transaction_details`
@@ -167,6 +185,12 @@ ALTER TABLE `transaction_details`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `category`
@@ -203,12 +227,6 @@ ALTER TABLE `transaction_details`
 --
 
 --
--- Ketidakleluasaan untuk tabel `payment`
---
-ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_transaction` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`);
-
---
 -- Ketidakleluasaan untuk tabel `product`
 --
 ALTER TABLE `product`
@@ -218,7 +236,8 @@ ALTER TABLE `product`
 -- Ketidakleluasaan untuk tabel `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `transaction_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+  ADD CONSTRAINT `transaction_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  ADD CONSTRAINT `transaction_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`);
 
 --
 -- Ketidakleluasaan untuk tabel `transaction_details`
