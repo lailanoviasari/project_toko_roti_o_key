@@ -1,0 +1,181 @@
+@font-face {
+    font-family: "Magic-Bread-Regular";
+    src: url(../../fonts/Magic-Bread-Regular.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "SnellBT-Reguler";
+    src: url(../../fonts/SnellBT-Reguler.otf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "BrownieCake";
+    src: url(../../fonts/BrownieCake.otf);
+    font-weight: 700;
+}
+
+body {
+    background-color: rgb(51, 51, 51);
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #87431D;
+}
+
+.nav_search-btn {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    color: #87431D;
+}
+
+.navbar-nav .nav-item .nav-link {
+    text-align: end;
+    font-size: 18px;
+    color: #87431D;
+    padding: 10px 30px;
+    text-transform: uppercase;
+}
+
+form .search input {
+    border-color: #87431D;
+}
+
+.bg-hero {
+    background-image: url(../img/GEP75-1920x800.jpg);
+    background-size: cover;
+    background-position: top right;
+}
+
+.darken {
+    backdrop-filter: brightness(25%);
+    /* background-color: black;
+    opacity: 20%; */
+}
+
+.bg-coklat {
+    background-color: #87431D;
+}
+
+.bg-nav {
+    background-color: #DBCBBD;
+}
+
+.greeting {
+    font-size: 42px;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #DBCBBD;
+}
+
+.greeting span {
+    font-size: 84px;
+    font-weight: bolder;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #DBCBBD;
+}
+
+.container-slide {
+    margin-left: auto;
+    width: 750px;
+}
+
+.best-product-section h1 {
+    font-size: 42px;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #87431D;
+}
+
+.best-product-section p {
+    font-size: 18px;
+    color: #87431D;
+}
+
+.scroll {
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.btn-utama {
+    color: #DBCBBD;
+    background-color: #87431D;
+}
+
+.new-product-section h1 {
+    font-size: 42px;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #DBCBBD;
+}
+
+.new-product-section p {
+    font-size: 18px;
+    color: #DBCBBD;
+}
+
+.btn-second {
+    color: #87431D;
+    background-color: #DBCBBD;
+}
+
+.heading_container h2 {
+    font-size: 42pt;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #DBCBBD;
+}
+
+.label-contact-us {
+    width: 100%;
+    background-color: transparent;
+    font-size: 14pt;
+    color: #DBCBBD;
+}
+
+footer .container p {
+    font-size: 14pt;
+    color: #87431D;
+}
+
+.text-header {
+    font-size: 28pt;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #87431D;
+}
+
+.text-second {
+    font-size: 28pt;
+    font-weight: bold;
+    font-family: "Magic-Bread-Regular", sans-serif;
+    color: #DBCBBD;
+}
+
+.p-text-second {
+    font-size: 12pt;
+    color: #DBCBBD;
+}
+
+.text-normal {
+    font-size: 12pt;
+    color: #DBCBBD;
+}
+
+.text-coklat-dark {
+    color: #290001;
+}
+
+.table {
+    background-color: #DBCBBD;
+    border-color: #290001;
+    color: #87431D;
+}
