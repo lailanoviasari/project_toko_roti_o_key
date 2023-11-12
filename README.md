@@ -3,9 +3,13 @@
 Owner : Laila Novia Sari
 
 Tabel :
-1. customer
-2. transaction
-3. transaction_details
-4. product
-5. category
-6. payment
+1. product
+2. category
+3. patissier
+
+Pivot Tabel :
+1. make_product
+
+Relasi :
+1. one to many : category ke product
+2. many to many : product ke patissier
