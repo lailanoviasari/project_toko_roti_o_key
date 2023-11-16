@@ -18,10 +18,10 @@
 
 </head>
 
-<body class="container-fluid my-3">
+<body>
 
   <!-- begin :: navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3 sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.php">O-Key</a>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
   <!-- end :: navbar -->
 
   <!-- begin :: category product -->
-  <div class="container-fluid bg-coklat p-5">
+  <section id="category_product" class="container-fluid bg-coklat p-5">
     <div class="text-center">
       <h1 class="text-second">Product Category</h1>
     </div>
@@ -118,7 +118,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </section>
   <!-- end :: category product -->
 
   <!-- begin :: all product -->
@@ -146,12 +146,40 @@
   <!-- end :: all product -->
 
   <!-- begin :: footer -->
-  <footer class="container-fluid text-center bg-nav">
+  <footer class="container-fluid text-center bg-nav fixed-bottom">
     <div class="container">
       <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
     </div>
   </footer>
   <!-- end :: footer -->
+
+  <!-- begin :: btn scroll top -->
+  <a class="btn btn-dark scroll-top" href="#category_product" tmpleft="1275" tmptop="550">^</a>
+  <!-- end :: btn scroll top -->
+
+  <!-- begin :: CDN jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- end :: CDN jquery -->
+
+  <!-- begin :: scroll-top -->
+  <script>
+    $(function() {
+      $(window).scroll(function() {
+        alignElements();
+      });
+    });
+
+    function alignElements() {
+      var scrollTop = $(window).scrollTop();
+      $(".scroll-top").each(function() {
+        $(this).offset({
+          top: scrollTop + parseInt($(this).attr("tmptop")),
+          left: parseInt($(this).attr("tmpleft"))
+        });
+      });
+    }
+  </script>
+  <!-- end :: scroll-top -->
 
 </body>
 

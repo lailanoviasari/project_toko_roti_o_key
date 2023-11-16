@@ -1,3 +1,12 @@
+<?php
+include("../../database/connection.php");
+
+$make_product = mysqli_query($connection, "SELECT * FROM make_product");
+$products = mysqli_query($connection, "SELECT * FROM product");
+$patissiers = mysqli_query($connection, "SELECT * FROM patissier");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +27,10 @@
 
 </head>
 
-<body class="container-fluid my-3">
+<body>
 
     <!-- begin :: navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3 sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">O-Key</a>
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,10 +71,12 @@
     <!-- end :: navbar -->
 
     <!-- begin :: tabel data make_product -->
-    <div class="container-fluid bg-coklat p-5">
-        <p class="text-second text-center">Data Make Product</p>
-        <div class="text-center pb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_data">Tambah Data</button>
+    <section class="container-fluid bg-coklat p-5" id="tabel_data">
+        <div class="my-3">
+            <p class="text-second text-center">Data Make Product</p>
+            <div class="text-center pb-3">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_data">Tambah Data</button>
+            </div>
         </div>
         <div class="row align-items-center px-5">
             <table class="table table-bordered table-responsive bg-light">
@@ -81,73 +92,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>2023-11-11 13:19:31</td>
-                        <td>2023-11-25 13:19:31</td>
-                        <td>25</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>2023-11-11 13:21:12</td>
-                        <td>2023-11-25 13:21:12</td>
-                        <td>25</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>2023-11-11 13:21:12</td>
-                        <td>2023-11-25 13:21:12</td>
-                        <td>20</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
+                    <?php foreach ($make_product as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $value['make_product_id'] ?></td>
+                            <td><?php echo $value['product_id'] ?></td>
+                            <td><?php echo $value['patissier_id'] ?></td>
+                            <td><?php echo $value['make_date'] ?></td>
+                            <td><?php echo $value['exp_date'] ?></td>
+                            <td><?php echo $value['quantity'] ?></td>
+                            <td class="text-center">
+                                <button type="button" id="btn_edit" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data" onclick="edit_data(<?php echo $value['make_product_id'] ?>)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                    </svg>
+                                </button>
+                                <a href="delete/delete_make_product.php?id=<?php echo $value['make_product_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
-    </div>
+    </section>
     <!-- end :: tabel data make_product -->
 
     <!-- begin :: modal add data -->
@@ -159,36 +130,46 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_add_Data" action="">
+                    <form id="form_add_Data" action="add/add_make_product.php" method="POST">
                         <div class="mb-3">
                             <label for="make_product_id" class="col-form-label">make_product_id:</label>
-                            <input type="text" class="form-control" id="make_product_id">
+                            <input type="text" class="form-control" name="make_product_id" id="make_product_id" placeholder="Auto Increment" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="product_id" class="col-form-label">product_id:</label>
-                            <input type="text" class="form-control" id="product_id">
+                            <select class="form-select" name="product_id" id="product_id">
+                                <option value=""></option>
+                                <?php foreach ($products as $key => $data) { ?>
+                                    <option value="<?php echo $data['product_id'] ?>"><?php echo $data["product_id"] . ' | ' .  $data["product_name"] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="patissier_id" class="col-form-label">patissier_id:</label>
-                            <input type="text" class="form-control" id="patissier_id">
+                            <select class="form-select" name="patissier_id" id="patissier_id">
+                                <option value=""></option>
+                                <?php foreach ($patissiers as $key => $data) { ?>
+                                    <option value="<?php echo $data['patissier_id'] ?>"><?php echo $data["patissier_id"] . ' | ' .  $data["nama_patissier"] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="make_date" class="col-form-label">make_date:</label>
-                            <input type="date" class="form-control" id="make_date">
+                            <input type="datetime-local" class="form-control" name="make_date" id="make_date">
                         </div>
                         <div class="mb-3">
                             <label for="exp_date" class="col-form-label">exp_date:</label>
-                            <input type="date" class="form-control" id="exp_date">
+                            <input type="datetime-local" class="form-control" name="exp_date" id="exp_date">
                         </div>
                         <div class="mb-3">
                             <label for="quantity" class="col-form-label">quantity:</label>
-                            <input type="number" class="form-control" id="quantity">
+                            <input type="number" class="form-control" name="quantity" id="quantity">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-utama">Submit</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-utama">Submit</button>
                 </div>
             </div>
         </div>
@@ -203,37 +184,7 @@
                     <h1 class="modal-title fs-5" id="modal_edit_data">Edit New Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="form_edit_Data" action="">
-                        <div class="mb-3">
-                            <label for="make_product_id" class="col-form-label">make_product_id:</label>
-                            <input type="text" class="form-control" id="make_product_id">
-                        </div>
-                        <div class="mb-3">
-                            <label for="product_id" class="col-form-label">product_id:</label>
-                            <input type="text" class="form-control" id="product_id">
-                        </div>
-                        <div class="mb-3">
-                            <label for="patissier_id" class="col-form-label">patissier_id:</label>
-                            <input type="text" class="form-control" id="patissier_id">
-                        </div>
-                        <div class="mb-3">
-                            <label for="make_date" class="col-form-label">make_date:</label>
-                            <input type="date" class="form-control" id="make_date">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exp_date" class="col-form-label">exp_date:</label>
-                            <input type="date" class="form-control" id="exp_date">
-                        </div>
-                        <div class="mb-3">
-                            <label for="quantity" class="col-form-label">quantity:</label>
-                            <input type="number" class="form-control" id="quantity">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-utama">Submit</button>
+                <div class="modal-body" id="modal_body_edit">
                 </div>
             </div>
         </div>
@@ -241,12 +192,58 @@
     <!-- end :: modal edit data -->
 
     <!-- begin :: footer -->
-    <footer class="container-fluid text-center bg-nav">
+    <footer class="container-fluid text-center bg-nav fixed-bottom">
         <div class="container">
             <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
         </div>
     </footer>
     <!-- end :: footer -->
+
+    <!-- begin :: btn scroll top -->
+    <a class="btn btn-dark scroll-top" href="#tabel_data" tmpleft="1275" tmptop="550">^</a>
+    <!-- end :: btn scroll top -->
+
+    <!-- begin :: CDN jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- end :: CDN jquery -->
+
+    <!-- begin :: jquery edit data make_product -->
+    <script>
+        function edit_data(make_product_id) {
+            $.ajax({
+                method: 'POST',
+                url: 'edit/edit_make_product.php',
+                data: {
+                    make_product_id: make_product_id
+                },
+                success: function(result) {
+                    $('#modal_body_edit').html(result)
+                    /* confirm('Are you sure want to save your change?') */
+                }
+            })
+        }
+    </script>
+    <!-- end :: jquery edit data make_product -->
+
+    <!-- begin :: scroll-top -->
+    <script>
+        $(function() {
+            $(window).scroll(function() {
+                alignElements();
+            });
+        });
+
+        function alignElements() {
+            var scrollTop = $(window).scrollTop();
+            $(".scroll-top").each(function() {
+                $(this).offset({
+                    top: scrollTop + parseInt($(this).attr("tmptop")),
+                    left: parseInt($(this).attr("tmpleft"))
+                });
+            });
+        }
+    </script>
+    <!-- end :: scroll-top -->
 
 </body>
 

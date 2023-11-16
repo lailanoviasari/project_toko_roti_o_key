@@ -1,3 +1,14 @@
+<?php
+
+use function PHPSTORM_META\type;
+
+include("database/connection.php");
+
+$products = mysqli_query($connection, "SELECT * FROM product;");
+
+$new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN product ON product.product_id = make_product.product_id GROUP BY make_product.product_id");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +29,10 @@
 
 </head>
 
-<body class="container-fluid my-3">
+<body>
 
     <!-- begin :: navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3 sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">O-Key</a>
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +73,7 @@
     <!-- end :: navbar -->
 
     <!-- begin :: header -->
-    <div class="container-fluid bg-hero p-5">
+    <section id="header" class="container-fluid bg-hero p-5">
         <div class="darken">
             <div id="carouselExampleCaptions" class="carousel slide d-flex" data-bs-ride="false">
                 <div class="carousel-indicators">
@@ -101,29 +112,52 @@
                 </button>
             </div>
         </div>
-    </div>
+    </section>
     <!-- end :: header -->
 
     <!-- begin :: new product -->
     <div class="container-fluid bg-coklat p-5">
         <div class="row align-items-center px-5">
             <div class="col-9 text-center">
-                <div class="row row-cols-md-2 g-4">
-                    <?php for ($i = 0; $i < 2; $i++) { ?>
-                        <div class="col text-center">
-                            <div class="card shadow mb-3" style="max-width: 540px;">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-md-6">
-                                        <img src="assets/img/cakes-strawberry-sweet.jpg" class="card-img-top" alt="..." width="400px">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Black Forest</h5>
-                                            <p class="card-text">Rp140.000</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="row row-cols-md-2 g-4 justify-content-center">
+                    <?php if (mysqli_num_rows($new_products) > 0) {
+                        $count = 1;
+                        while ($new_product = mysqli_fetch_array($new_products)) {
+                            date_default_timezone_set("Asia/Jakarta");
+                            $date_add = new DateTime($new_product['date_add']);
+                            $d_now = new DateTime();
+                            $diff_day = $date_add->diff($d_now)->format("%d days");
+                            $diff_hour = $date_add->diff($d_now)->format("%h hours");
+                            $diff_minute = $date_add->diff($d_now)->format("%i minutes");
+                            if ($diff_hour <= 24 && $count <= 5) { ?>
+                                <div class="col text-center">
+                                    <div class="card shadow mb-3" style="max-width: 540px;">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-md-6">
+                                                <img src="assets/img/upload/<?php echo $new_product['product_image'] ?>" class="card-img-top" alt="..." width="400px">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $new_product['product_name'] ?></h5>
+                                                    <p class="card-text">Rp<?php echo $new_product['price'] ?></p>
+                                                    <p class="card-text"><small class="text-muted">Last updated <?php echo $diff_hour . ' and ' . $diff_minute . ' ago' ?></small></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            <?php } else { ?>
+                                <div class="col text-center">
+                                    <div class="card shadow mb-3" style="max-width: 540px;">
+                                        <p>Nothing new this month</p>
+                                    </div>
+                                </div>
+                        <?php }
+                        }
+                    } else { ?>
+                        <div class="col text-center">
+                            <div class="card shadow mb-3" style="max-width: 540px;">
+                                <div class="card-body">Nothing new in this month</div>
                             </div>
                         </div>
                     <?php } ?>
@@ -139,21 +173,23 @@
     </div>
     <!-- end :: new product -->
 
-    <!-- begin :: best product -->
+    <!-- begin :: all product -->
     <div class="container-fluid bg-nav p-5">
-        <div class="best-product-section text-center">
-            <h1>Our Best Seller Product</h1>
+        <div class="all-product-section text-center">
+            <h1>Our Product</h1>
             <p>Let's choose your favorite product</p>
             <div class="scroll">
-                <div class="row row-cols-md-5 row-cols-sm-4 g-4 mx-5">
-                    <?php for ($i = 0; $i < 15; $i++) { ?>
+                <div class="row row-cols-md-5 row-cols-sm-4 g-4 p-5">
+                    <?php foreach ($products as $key => $product) { ?>
                         <div class="col">
-                            <div class="card shadow">
-                                <img src="assets/img/cakes-blackForest.jpg" class="card-img-top" alt="...">
+                            <div class="card shadow" style="height: 400px;">
+                                <img src="assets/img/upload/<?php echo $product['product_image'] ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Black Forest</h5>
-                                    <p class="card-text">Rp140.000</p>
-                                    <p class="card-text">Moist chocolate layers, cherry filling, whipped cream, a classic delight.</p>
+                                    <h5 class="card-title"><?php echo $product['product_name'] ?></h5>
+                                    <p class="card-text">Rp<?php echo number_format($product['price']) ?></p>
+                                    <p class="card-text pb-2">
+                                        <?php echo substr($product['description'], 0, 35) . ' ...' ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -162,9 +198,10 @@
             </div>
         </div>
     </div>
-    <!-- end :: best product -->
+    <!-- end :: all product -->
 
-    <div class="container-fluid bg-coklat p-5">
+    <!-- begin :: contanct us -->
+    <div class=" container-fluid bg-coklat p-5">
         <div class="row align-items-center">
             <div class="col-4 offset-1">
                 <div class="form_container">
@@ -197,18 +234,48 @@
                 </div>
             </div>
             <div class="col-6 offset-1">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15829.766627840367!2d112.72144118389268!3d-7.304176149536146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x2dd7fb97917c2fad%3A0x21b1122d5fe174cc!2sSurabaya%20Zoo!3m2!1d-7.2959546!2d112.73660939999999!4m0!5e0!3m2!1sen!2sid!4v1699773227260!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15829.766627840367!2d112.72144118389268!3d-7.304176149536146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x2dd7fb97917c2fad%3A0x21b1122d5fe174cc!2sSurabaya%20Zoo!3m2!1d-7.2959546!2d112.73660939999999!4m0!5e0!3m2!1sen!2sid!4v1699773227260!5m2!1sen!2sid" width="500" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
+    <!-- end :: contanct us -->
 
     <!-- begin :: footer -->
-    <footer class="container-fluid text-center bg-nav">
+    <footer class="container-fluid text-center bg-nav fixed-bottom">
         <div class="container">
             <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
         </div>
     </footer>
     <!-- end :: footer -->
+
+    <!-- begin :: btn scroll top -->
+    <a class="btn btn-dark scroll-top" href="#header" tmpleft="1275" tmptop="550">^</a>
+    <!-- end :: btn scroll top -->
+
+    <!-- begin :: CDN jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- end :: CDN jquery -->
+
+    <!-- begin :: scroll-top -->
+    <script>
+        $(function() {
+            $(window).scroll(function() {
+                alignElements();
+            });
+        });
+
+        function alignElements() {
+            var scrollTop = $(window).scrollTop();
+            $(".scroll-top").each(function() {
+                $(this).offset({
+                    top: scrollTop + parseInt($(this).attr("tmptop")),
+                    left: parseInt($(this).attr("tmpleft"))
+                });
+            });
+        }
+    </script>
+    <!-- end :: scroll-top -->
+
 
 </body>
 

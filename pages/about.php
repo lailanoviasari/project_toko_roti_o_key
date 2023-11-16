@@ -18,9 +18,9 @@
 
 </head>
 
-<body class="container-fluid my-3">
+<body>
   <!-- begin :: navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3">
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3 sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">O-Key</a>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
   <!-- end :: navbar -->
 
   <!-- begin :: heading about -->
-  <div class="container-fluid bg-coklat p-5">
+  <div id="header" class="container-fluid bg-coklat p-5">
     <div class="container align-items-center text-center px-5">
       <img src="../assets/img/Screenshot 2023-11-11 224820.png" class=" mx-auto" alt="" style="width: 20%;">
       <p class="text-normal mx-auto py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore ipsa repellendus laboriosam obcaecati sequi nam aut incidunt minima autem? Repellat reprehenderit nulla dolorum quisquam tempore, sint ea magnam placeat vel. Qui libero facilis magni aliquam est soluta eveniet corporis ex adipisci veniam rem aliquid corrupti molestias possimus fugit atque esse quam tempora ab dolores, officiis ullam exercitationem animi! Ullam, dicta suscipit exercitationem veniam possimus atque itaque inventore ab doloribus libero sint voluptatem facilis nihil modi.</p>
@@ -88,12 +88,41 @@
   </div>
 
   <!-- begin :: footer -->
-  <footer class="container-fluid text-center bg-nav">
+  <footer class="container-fluid text-center bg-nav fixed-bottom">
     <div class="container">
       <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
     </div>
   </footer>
   <!-- end :: footer -->
+
+    <!-- begin :: btn scroll top -->
+    <a class="btn btn-dark scroll-top" href="#header" tmpleft="1275" tmptop="550">^</a>
+    <!-- end :: btn scroll top -->
+
+    <!-- begin :: CDN jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- end :: CDN jquery -->
+
+    <!-- begin :: scroll-top -->
+    <script>
+        $(function() {
+            $(window).scroll(function() {
+                alignElements();
+            });
+        });
+
+        function alignElements() {
+            var scrollTop = $(window).scrollTop();
+            $(".scroll-top").each(function() {
+                $(this).offset({
+                    top: scrollTop + parseInt($(this).attr("tmptop")),
+                    left: parseInt($(this).attr("tmpleft"))
+                });
+            });
+        }
+    </script>
+    <!-- end :: scroll-top -->
+
 
 </body>
 

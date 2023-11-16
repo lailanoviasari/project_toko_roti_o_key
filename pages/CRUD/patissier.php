@@ -1,3 +1,11 @@
+<?php
+
+include("../../database/connection.php");
+
+$patissiers = mysqli_query($connection, "SELECT * FROM patissier");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +26,9 @@
 
 </head>
 
-<body class="container-fluid my-3">
-
+<body>
     <!-- begin :: navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav px-3 sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">O-Key</a>
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,10 +69,12 @@
     <!-- end :: navbar -->
 
     <!-- begin :: tabel data patissier -->
-    <div class="container-fluid bg-coklat p-5">
-        <p class="text-second text-center">Data Patissier</p>
-        <div class="text-center pb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_data">Tambah Data</button>
+    <section id="tabel_data" class="container-fluid bg-coklat p-5">
+        <div class="my-3">
+            <p class="text-second text-center">Data Patissier</p>
+            <div class="text-center pb-3">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_data">Tambah Data</button>
+            </div>
         </div>
         <div class="row align-items-center px-5">
             <table class="table table-bordered table-responsive bg-light">
@@ -81,73 +90,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Asril</td>
-                        <td>male</td>
-                        <td>085678654345</td>
-                        <td>asril12@gmail.com</td>
-                        <td>Jln. Kartini No. 34. Bandung</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Rina</td>
-                        <td>female</td>
-                        <td>087567234517</td>
-                        <td>23rain@gmail.com</td>
-                        <td>Jln. Cendrawasih Timur, No. 01. Denpasar</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Erika</td>
-                        <td>female</td>
-                        <td>089757581527</td>
-                        <td>rikaa11@gmail.com</td>
-                        <td>Jln. Kuta Baru Utara, No. 34. Depok</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
+                    <?php foreach ($patissiers as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $value['patissier_id'] ?></td>
+                            <td><?php echo $value['nama_patissier'] ?></td>
+                            <td><?php echo $value['gender_patissier'] ?></td>
+                            <td><?php echo $value['telpon_patissier'] ?></td>
+                            <td><?php echo $value['email_patissier'] ?></td>
+                            <td>
+                                <?php if (strlen($value['alamat_patissier']) < 40) {
+                                    echo substr($value['alamat_patissier'], 0, 40);
+                                } else {
+                                    echo substr($value['alamat_patissier'], 0, 40) . '...';
+                                } ?>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" id="btn_edit" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit_data" onclick="edit_data(<?php echo $value['patissier_id'] ?>)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                    </svg>
+                                </button>
+                                <a href="delete/delete_patissier.php?id=<?php echo $value['patissier_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
-    </div>
+    </section>
     <!-- end :: tabel data patissier -->
 
     <!-- begin :: modal add data -->
@@ -159,36 +134,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_add_Data" action="">
+                    <form id="form_add_Data" action="add/add_patissier.php" method="POST">
                         <div class="mb-3">
                             <label for="patissier_id" class="col-form-label">Patissier id:</label>
-                            <input type="text" class="form-control" id="patissier_id">
+                            <input type="text" class="form-control" name="patissier_id" id="patissier_id" placeholder="Auto Increment" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="name">
+                            <label for="nama_patissier" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" name="nama_patissier" id="nama_patissier">
+                        </div>
+                        <div class="row mb-3">
+                            <label for="gender_patissier" class="col-form-label">Gender:</label>
+                            <div class="form-check col-5 ms-3">
+                                <input class="form-check-input" type="radio" name="gender_patissier" id="male" value="0" checked>
+                                <label class="form-check-label" for="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check col-5 ms-3">
+                                <input class="form-check-input" type="radio" name="gender_patissier" id="female" value="1">
+                                <label class="form-check-label" for="female">
+                                    Female
+                                </label>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="gender" class="col-form-label">Gender:</label>
-                            <input type="text" class="form-control" id="gender">
+                            <label for="telpon_patissier" class="col-form-label">Telpon:</label>
+                            <input type="text" class="form-control" name="telpon_patissier" id="telpon_patissier">
                         </div>
                         <div class="mb-3">
-                            <label for="telpon" class="col-form-label">Telpon:</label>
-                            <input type="date" class="form-control" id="telpon">
+                            <label for="email_patissier" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" name="email_patissier" id="email_patissier">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="email">
+                            <label for="alamat_patissier" class="col-form-label">Alamat:</label>
+                            <textarea class="form-control" id="alamat_patissier" name="alamat_patissier" style="height: 100px"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="col-form-label">Alamat:</label>
-                            <textarea class="form-control" id="alamat" name="alamat" style="height: 100px"></textarea>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-utama">Submit</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-utama">Submit</button>
                 </div>
             </div>
         </div>
@@ -203,37 +189,7 @@
                     <h1 class="modal-title fs-5" id="modal_edit_data">Edit New Data</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="form_edit_Data" action="">
-                        <div class="mb-3">
-                            <label for="patissier_id" class="col-form-label">Patissier id:</label>
-                            <input type="text" class="form-control" id="patissier_id">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="gender" class="col-form-label">Gender:</label>
-                            <input type="text" class="form-control" id="gender">
-                        </div>
-                        <div class="mb-3">
-                            <label for="telpon" class="col-form-label">Telpon:</label>
-                            <input type="date" class="form-control" id="telpon">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="col-form-label">Alamat:</label>
-                            <textarea class="form-control" id="alamat" name="alamat" style="height: 100px"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-utama">Submit</button>
+                <div class="modal-body" id="modal_body_edit">
                 </div>
             </div>
         </div>
@@ -241,12 +197,58 @@
     <!-- end :: modal edit data -->
 
     <!-- begin :: footer -->
-    <footer class="container-fluid text-center bg-nav">
+    <footer class="container-fluid text-center bg-nav fixed-bottom">
         <div class="container">
             <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
         </div>
     </footer>
     <!-- end :: footer -->
+
+    <!-- begin :: btn scroll top -->
+    <a class="btn btn-dark scroll-top" href="#tabel_data" tmpleft="1275" tmptop="550">^</a>
+    <!-- end :: btn scroll top -->
+
+    <!-- begin :: CDN jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- end :: CDN jquery -->
+
+    <!-- begin :: jquery edit data patissier -->
+    <script>
+        function edit_data(patissier_id) {
+            $.ajax({
+                method: 'POST',
+                url: 'edit/edit_patissier.php',
+                data: {
+                    patissier_id: patissier_id
+                },
+                success: function(result) {
+                    $('#modal_body_edit').html(result)
+                    /* confirm('Are you sure want to save your change?') */
+                }
+            })
+        }
+    </script>
+    <!-- end :: jquery edit data patissier -->
+
+    <!-- begin :: scroll-top -->
+    <script>
+        $(function() {
+            $(window).scroll(function() {
+                alignElements();
+            });
+        });
+
+        function alignElements() {
+            var scrollTop = $(window).scrollTop();
+            $(".scroll-top").each(function() {
+                $(this).offset({
+                    top: scrollTop + parseInt($(this).attr("tmptop")),
+                    left: parseInt($(this).attr("tmpleft"))
+                });
+            });
+        }
+    </script>
+    <!-- end :: scroll-top -->
 
 </body>
 
