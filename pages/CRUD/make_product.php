@@ -22,7 +22,7 @@ $patissiers = mysqli_query($connection, "SELECT * FROM patissier");
 
     <!-- begin :: CSS local -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
-    <link href="../../css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
     <!-- end :: CSS local -->
 
 </head>
