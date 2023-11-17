@@ -21,7 +21,6 @@ $categories = mysqli_query($connection, "SELECT * FROM category");
 
     <!-- begin :: CSS local -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
-    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
     <!-- end :: CSS local -->
 
 </head>
@@ -60,7 +59,9 @@ $categories = mysqli_query($connection, "SELECT * FROM category");
                 <form class="search d-flex" role="search">
                     <input class="form me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 20 20">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
                     </button>
                 </form>
             </div>
@@ -144,31 +145,31 @@ $categories = mysqli_query($connection, "SELECT * FROM category");
                         </div>
                         <div class="mb-3">
                             <label for="product_name" class="col-form-label">Product Name:</label>
-                            <input type="text" class="form-control" name="product_name" id="product_name">
+                            <input type="text" class="form-control" name="product_name" id="product_name" required>
                         </div>
                         <div class="mb-3">
                             <label for="price" class="col-form-label">Price:</label>
-                            <input type="text" class="form-control" name="price" id="price">
+                            <input type="text" class="form-control" name="price" id="price" required>
                         </div>
                         <div class="mb-3">
                             <label for="stock" class="col-form-label">Stock:</label>
-                            <input type="number" class="form-control" name="stock" id="stock">
+                            <input type="number" class="form-control" name="stock" id="stock" required>
                         </div>
                         <div class="mb-3">
                             <label for="product_img" class="col-form-label">Product Image:</label>
-                            <input type="file" class="form-control" name="product_img" id="product_img">
+                            <input type="file" class="form-control" name="product_img" id="product_img" accept=".jpg, .jpeg, .png" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="col-form-label">Description:</label>
-                            <textarea class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                            <textarea class="form-control" name="description" id="description" cols="30" rows="5" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="date_add" class="col-form-label">Add Date:</label>
-                            <input type="datetime-local" class="form-control" name="date_add" id="date_add">
+                            <input type="datetime-local" class="form-control" name="date_add" id="date_add" required>
                         </div>
                         <div class="mb-3">
                             <label for="category_id" class="col-form-label">Category id:</label>
-                            <select class="form-select" name="category_id" id="category_id">
+                            <select class="form-select" name="category_id" id="category_id" required>
                                 <option value=""></option>
                                 <?php foreach ($categories as $key => $data) { ?>
                                     <option value="<?php echo $data['category_id'] ?>"><?php echo $data["category_id"] . ' | ' .  $data["category_name"] ?></option>
@@ -177,7 +178,7 @@ $categories = mysqli_query($connection, "SELECT * FROM category");
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-utama">Submit</button>
+                            <button type="submit" name="submit" class="btn btn-utama">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -202,7 +203,7 @@ $categories = mysqli_query($connection, "SELECT * FROM category");
     <!-- end :: modal edit data -->
 
     <!-- begin :: footer -->
-    <footer class="container-fluid text-center bg-nav fixed-bottom">
+    <footer class="container-fluid text-center bg-nav pt-3 pb-1">
         <div class="container">
             <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
         </div>

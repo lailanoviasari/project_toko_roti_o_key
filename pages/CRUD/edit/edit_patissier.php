@@ -36,7 +36,7 @@ $result = mysqli_fetch_array($patissiers);
     </div>
     <div class="mb-3">
         <label for="telpon_patissier" class="col-form-label">Telpon:</label>
-        <input type="text" class="form-control" name="telpon_patissier" id="telpon_patissier" value="<?php echo $result['telpon_patissier']?>">
+        <input type="text" class="form-control" name="telpon_patissier" id="telpon_patissier" maxlength="12" value="<?php echo $result['telpon_patissier']?>">
     </div>
     <div class="mb-3">
         <label for="email_patissier" class="col-form-label">Email:</label>
