@@ -1,3 +1,11 @@
+<?php
+
+include("../database/connection.php");
+
+$products = mysqli_query($connection, "SELECT * FROM product");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +21,6 @@
 
   <!-- begin :: CSS local -->
   <link href="../assets/css/style.css" rel="stylesheet" />
-  <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
   <!-- end :: CSS local -->
 
 </head>
@@ -53,7 +60,9 @@
         <form class="search d-flex" role="search">
           <input class="form me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 20 20">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
           </button>
         </form>
       </div>
@@ -63,12 +72,12 @@
 
   <!-- begin :: category product -->
   <section id="category_product" class="container-fluid bg-coklat p-5">
-    <div class="text-center">
+    <div class="text-center m-5">
       <h1 class="text-second">Product Category</h1>
     </div>
     <div class="overflow-auto">
       <div class="row row-cols-md-6 row-cols-sm-3 g-4 text-center mx-5 my-3">
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#all" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/4532579.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -76,7 +85,7 @@
             </div>
           </div>
         </a>
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#bread" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/bread.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -84,7 +93,7 @@
             </div>
           </div>
         </a>
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#doughnat" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/donat.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -92,7 +101,7 @@
             </div>
           </div>
         </a>
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#pudding" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/pudding.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -100,7 +109,7 @@
             </div>
           </div>
         </a>
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#cake" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/cake.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -108,7 +117,7 @@
             </div>
           </div>
         </a>
-        <a href="#" style="text-decoration: none; color:black;" class="col">
+        <a href="#rollCake" style="text-decoration: none; color:black;" class="col">
           <div class="card shadow py-3">
             <img src="../assets/img/roll_cakes.png" class="card-img-top mx-auto" alt="..." style="width:50%">
             <div class="card-body">
@@ -122,19 +131,25 @@
   <!-- end :: category product -->
 
   <!-- begin :: all product -->
-  <div class="container-fluid bg-nav p-5">
-    <div class="best-product-section text-center">
+  <section id="all" class="container-fluid bg-nav p-5">
+    <div class="all-product-section text-center my-5">
       <h1>All of Product</h1>
       <p>Let's choose your favorite product</p>
-      <div class="scroll" style="height: 1000px;">
-        <div class="row row-cols-md-5 row-cols-sm-4 g-4 mx-5">
-          <?php for ($i = 0; $i < 30; $i++) { ?>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) { ?>
             <div class="col">
               <div class="card shadow">
-                <img src="../assets/img/cakes-blackForest.jpg" class="card-img-top" alt="...">
+                <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
                 <div class="card-body">
-                  <h5 class="card-title">Black Forest</h5>
-                  <p class="card-text">Rp140.000</p>
+                  <h5 class="card-title">
+                    <?php if (strlen($value['product_name']) < 15) {
+                      echo substr($value['product_name'], 0, 15);
+                    } else {
+                      echo substr($value['product_name'], 0, 15) . '...';
+                    } ?>
+                  </h5>
+                  <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
                 </div>
               </div>
             </div>
@@ -142,11 +157,171 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!-- end :: all product -->
 
+  <!-- begin :: breads product -->
+  <section id="bread" class="container-fluid bg-coklat p-5">
+    <div class="text-center my-5">
+      <h1 class="text-second">Breads</h1>
+      <p class="text-light">Let's choose your favorite breads</p>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) {
+            if ($value['category_id'] == 1) { ?>
+              <div class="col">
+                <div class="card shadow">
+                  <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php if (strlen($value['product_name']) < 15) {
+                        echo substr($value['product_name'], 0, 15);
+                      } else {
+                        echo substr($value['product_name'], 0, 15) . '...';
+                      } ?>
+                    </h5>
+                    <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end :: breads product -->
+
+  <!-- begin :: doughnats product -->
+  <section id="doughnat" class="container-fluid bg-nav p-5">
+    <div class="all-product-section text-center my-5">
+      <h1>Doughnats</h1>
+      <p>Let's choose your favorite Doughnats</p>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) {
+            if ($value['category_id'] == 2) { ?>
+              <div class="col">
+                <div class="card shadow">
+                  <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php if (strlen($value['product_name']) < 15) {
+                        echo substr($value['product_name'], 0, 15);
+                      } else {
+                        echo substr($value['product_name'], 0, 15) . '...';
+                      } ?>
+                    </h5>
+                    <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end :: doughnats product -->
+
+  <!-- begin :: pudding product -->
+  <section id="pudding" class="container-fluid bg-coklat p-5">
+    <div class="text-center my-5">
+      <h1 class="text-second">Pudding</h1>
+      <p class="text-light">Let's choose your favorite pudding</p>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) {
+            if ($value['category_id'] == 3) { ?>
+              <div class="col">
+                <div class="card shadow">
+                  <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php if (strlen($value['product_name']) < 15) {
+                        echo substr($value['product_name'], 0, 15);
+                      } else {
+                        echo substr($value['product_name'], 0, 15) . '...';
+                      } ?>
+                    </h5>
+                    <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end :: pudding product -->
+
+  <!-- begin :: cakes product -->
+  <section id="cake" class="container-fluid bg-nav p-5">
+    <div class="all-product-section text-center my-5">
+      <h1>Cakes</h1>
+      <p>Let's choose your favorite cakes</p>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) {
+            if ($value['category_id'] == 4) { ?>
+              <div class="col">
+                <div class="card shadow">
+                  <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php if (strlen($value['product_name']) < 15) {
+                        echo substr($value['product_name'], 0, 15);
+                      } else {
+                        echo substr($value['product_name'], 0, 15) . '...';
+                      } ?>
+                    </h5>
+                    <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end :: cakes product -->
+
+  <!-- begin :: rollCakes product -->
+  <section id="rollCake" class="container-fluid bg-coklat p-5">
+    <div class="text-center my-5">
+      <h1 class="text-second">Roll Cakes</h1>
+      <p class="text-light">Let's choose your favorite roll cakes</p>
+      <div class="scroll my-3" style="height: 450px;">
+        <div class="row justify-content-center row-cols-md-5 row-cols-sm-4 g-4 p-5">
+          <?php foreach ($products as $key => $value) {
+            if ($value['category_id'] == 5) { ?>
+              <div class="col">
+                <div class="card shadow">
+                  <img src="../assets/img/upload/<?php echo $value['product_image'] ?>" class="card-img-top" alt="<?php echo $value['product_name'] ?>">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php if (strlen($value['product_name']) < 15) {
+                        echo substr($value['product_name'], 0, 15);
+                      } else {
+                        echo substr($value['product_name'], 0, 15) . '...';
+                      } ?>
+                    </h5>
+                    <p class="card-text">Rp<?php echo number_format($value['price']) ?></p>
+                  </div>
+                </div>
+              </div>
+          <?php }
+          } ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end :: rollCakes product -->
+
   <!-- begin :: footer -->
-  <footer class="container-fluid text-center bg-nav fixed-bottom">
+  <footer class="container-fluid text-center bg-nav pt-3 pb-1">
     <div class="container">
       <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
     </div>
