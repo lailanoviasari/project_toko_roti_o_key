@@ -13,7 +13,6 @@
 
   <!-- begin :: CSS local -->
   <link href="../assets/css/style.css" rel="stylesheet" />
-  <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
   <!-- end :: CSS local -->
 
 </head>
@@ -52,7 +51,9 @@
         <form class="search d-flex" role="search">
           <input class="form me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 20 20">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
           </button>
         </form>
       </div>
@@ -88,40 +89,40 @@
   </div>
 
   <!-- begin :: footer -->
-  <footer class="container-fluid text-center bg-nav fixed-bottom">
+  <footer class="container-fluid text-center bg-nav pt-3 pb-1">
     <div class="container">
       <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
     </div>
   </footer>
   <!-- end :: footer -->
 
-    <!-- begin :: btn scroll top -->
-    <a class="btn btn-dark scroll-top" href="#header" tmpleft="1275" tmptop="550">^</a>
-    <!-- end :: btn scroll top -->
+  <!-- begin :: btn scroll top -->
+  <a class="btn btn-dark scroll-top" href="#header" tmpleft="1275" tmptop="550">^</a>
+  <!-- end :: btn scroll top -->
 
-    <!-- begin :: CDN jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- end :: CDN jquery -->
+  <!-- begin :: CDN jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- end :: CDN jquery -->
 
-    <!-- begin :: scroll-top -->
-    <script>
-        $(function() {
-            $(window).scroll(function() {
-                alignElements();
-            });
+  <!-- begin :: scroll-top -->
+  <script>
+    $(function() {
+      $(window).scroll(function() {
+        alignElements();
+      });
+    });
+
+    function alignElements() {
+      var scrollTop = $(window).scrollTop();
+      $(".scroll-top").each(function() {
+        $(this).offset({
+          top: scrollTop + parseInt($(this).attr("tmptop")),
+          left: parseInt($(this).attr("tmpleft"))
         });
-
-        function alignElements() {
-            var scrollTop = $(window).scrollTop();
-            $(".scroll-top").each(function() {
-                $(this).offset({
-                    top: scrollTop + parseInt($(this).attr("tmptop")),
-                    left: parseInt($(this).attr("tmpleft"))
-                });
-            });
-        }
-    </script>
-    <!-- end :: scroll-top -->
+      });
+    }
+  </script>
+  <!-- end :: scroll-top -->
 
 
 </body>

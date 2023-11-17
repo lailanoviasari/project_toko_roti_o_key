@@ -24,7 +24,6 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
 
     <!-- begin :: CSS local -->
     <link href="assets/css/style.css" rel="stylesheet" />
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
     <!-- end :: CSS local -->
 
 </head>
@@ -64,7 +63,9 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
                 <form class="search d-flex" role="search">
                     <input class="form me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 20 20">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
                     </button>
                 </form>
             </div>
@@ -129,7 +130,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
                             $diff_day = $date_add->diff($d_now)->format("%d days");
                             $diff_hour = $date_add->diff($d_now)->format("%h hours");
                             $diff_minute = $date_add->diff($d_now)->format("%i minutes");
-                            if ($diff_hour <= 24 && $count <= 5) { ?>
+                            if ($diff_day <= 7 && $count < 5) { ?>
                                 <div class="col text-center">
                                     <div class="card shadow mb-3" style="max-width: 540px;">
                                         <div class="row g-0 align-items-center">
@@ -139,25 +140,20 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
                                             <div class="col-md-6">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $new_product['product_name'] ?></h5>
-                                                    <p class="card-text">Rp<?php echo $new_product['price'] ?></p>
+                                                    <p class="card-text">Rp<?php echo number_format($new_product['price']) ?></p>
                                                     <p class="card-text"><small class="text-muted">Last updated <?php echo $diff_hour . ' and ' . $diff_minute . ' ago' ?></small></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php } else { ?>
-                                <div class="col text-center">
-                                    <div class="card shadow mb-3" style="max-width: 540px;">
-                                        <p>Nothing new this month</p>
-                                    </div>
-                                </div>
-                        <?php }
+                        <?php $count++;
+                            }
                         }
                     } else { ?>
                         <div class="col text-center">
                             <div class="card shadow mb-3" style="max-width: 540px;">
-                                <div class="card-body">Nothing new in this month</div>
+                                <div class="card-body">Nothing new in this week</div>
                             </div>
                         </div>
                     <?php } ?>
@@ -165,7 +161,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
             </div>
             <div class="col-3">
                 <div class="new-product-section text-center">
-                    <h1>New Product in This Month</h1>
+                    <h1>New Product in This Week</h1>
                     <p>With the best ingredients and made by expert patissier</p>
                 </div>
             </div>
@@ -182,7 +178,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
                 <div class="row row-cols-md-5 row-cols-sm-4 g-4 p-5">
                     <?php foreach ($products as $key => $product) { ?>
                         <div class="col">
-                            <div class="card shadow" style="height: 400px;">
+                            <div class="card shadow" style="height: 450px;">
                                 <img src="assets/img/upload/<?php echo $product['product_image'] ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $product['product_name'] ?></h5>
@@ -241,7 +237,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
     <!-- end :: contanct us -->
 
     <!-- begin :: footer -->
-    <footer class="container-fluid text-center bg-nav fixed-bottom">
+    <footer class="container-fluid text-center bg-nav pt-3 pb-1">
         <div class="container">
             <p>Copyright &copy; 2023 lailanoviasari. All Rights Reserved</p>
         </div>
