@@ -37,7 +37,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ms-auto mb-2 ">
                     <li class="nav-item active">
                         <a class="nav-link active" href="index.php">Home</a>
@@ -130,7 +130,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
                             $diff_day = $date_add->diff($d_now)->format("%d days");
                             $diff_hour = $date_add->diff($d_now)->format("%h hours");
                             $diff_minute = $date_add->diff($d_now)->format("%i minutes");
-                            if ($diff_day <= 7 && $count < 5) { ?>
+                            if ($diff_day <= 7 && $count < 3) { ?>
                                 <div class="col text-center">
                                     <div class="card shadow mb-3" style="max-width: 540px;">
                                         <div class="row g-0 align-items-center">
@@ -174,11 +174,11 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
         <div class="all-product-section text-center">
             <h1>Our Product</h1>
             <p>Let's choose your favorite product</p>
-            <div class="scroll">
+            <div class="scroll" style="height: 500px;">
                 <div class="row row-cols-md-5 row-cols-sm-4 g-4 p-5">
                     <?php foreach ($products as $key => $product) { ?>
                         <div class="col">
-                            <div class="card shadow" style="height: 450px;">
+                            <div class="card shadow" style="height: 500px;">
                                 <img src="assets/img/upload/<?php echo $product['product_image'] ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $product['product_name'] ?></h5>
@@ -245,7 +245,7 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
     <!-- end :: footer -->
 
     <!-- begin :: btn scroll top -->
-    <a class="btn btn-dark scroll-top" href="#header" tmpleft="1275" tmptop="550">^</a>
+    <a class="btn ms-auto" href="#header" id="scroll-btn" style="width:max-content">&uarr;</a>
     <!-- end :: btn scroll top -->
 
     <!-- begin :: CDN jquery -->
@@ -254,20 +254,17 @@ $new_products = mysqli_query($connection, "SELECT * FROM make_product JOIN produ
 
     <!-- begin :: scroll-top -->
     <script>
-        $(function() {
-            $(window).scroll(function() {
-                alignElements();
-            });
-        });
+        // ketika pengunjung scroll kebawah 75px dari atas dokumen, maka tampilkan tombol scroll-btn
+        window.onscroll = function() {
+            scrollFunction()
+        };
 
-        function alignElements() {
-            var scrollTop = $(window).scrollTop();
-            $(".scroll-top").each(function() {
-                $(this).offset({
-                    top: scrollTop + parseInt($(this).attr("tmptop")),
-                    left: parseInt($(this).attr("tmpleft"))
-                });
-            });
+        function scrollFunction() {
+            if (document.body.scrollTop > 75 || document.documentElement.scrollTop > 75) {
+                document.getElementById("scroll-btn").style.display = "block";
+            } else {
+                document.getElementById("scroll-btn").style.display = "none";
+            }
         }
     </script>
     <!-- end :: scroll-top -->

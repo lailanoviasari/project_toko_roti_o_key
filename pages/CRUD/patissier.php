@@ -33,7 +33,7 @@ $patissiers = mysqli_query($connection, "SELECT * FROM patissier");
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ms-auto mb-2 ">
                     <li class="nav-item active">
                         <a class="nav-link active" href="../../index.php">Home</a>
@@ -205,13 +205,30 @@ $patissiers = mysqli_query($connection, "SELECT * FROM patissier");
     </footer>
     <!-- end :: footer -->
 
-    <!-- begin :: btn scroll top -->
-    <a class="btn btn-dark scroll-top" href="#tabel_data" tmpleft="1275" tmptop="550">^</a>
-    <!-- end :: btn scroll top -->
+  <!-- begin :: btn scroll top -->
+  <a href="#tabel_data" id="scroll-btn" class="btn ms-auto" style="width: max-content;">&uarr;</a>
+  <!-- end :: btn scroll top -->
 
-    <!-- begin :: CDN jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- end :: CDN jquery -->
+  <!-- begin :: CDN jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- end :: CDN jquery -->
+
+  <!-- begin :: scroll-top -->
+  <script>
+    // ketika pengunjung scroll kebawah 75px dari atas dokumen, maka tampilkan tombol scroll-btn
+    window.onscroll = function() {
+      scrollFunction()
+    };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 75 || document.documentElement.scrollTop > 75) {
+        document.getElementById("scroll-btn").style.display = "block";
+      } else {
+        document.getElementById("scroll-btn").style.display = "none";
+      }
+    }
+  </script>
+  <!-- end :: scroll-top -->
 
     <!-- begin :: jquery edit data patissier -->
     <script>
@@ -230,26 +247,6 @@ $patissiers = mysqli_query($connection, "SELECT * FROM patissier");
         }
     </script>
     <!-- end :: jquery edit data patissier -->
-
-    <!-- begin :: scroll-top -->
-    <script>
-        $(function() {
-            $(window).scroll(function() {
-                alignElements();
-            });
-        });
-
-        function alignElements() {
-            var scrollTop = $(window).scrollTop();
-            $(".scroll-top").each(function() {
-                $(this).offset({
-                    top: scrollTop + parseInt($(this).attr("tmptop")),
-                    left: parseInt($(this).attr("tmpleft"))
-                });
-            });
-        }
-    </script>
-    <!-- end :: scroll-top -->
 
 </body>
 
